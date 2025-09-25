@@ -54,35 +54,26 @@ form label {
   font-weight: 500;
 }
 
-/* Inputs, selects */
+/* Inputs */
 form input[type="text"],
 form input[type="number"],
 form input[type="date"],
 form input[type="time"],
-form select {
+form input[type="email"] {
   padding: 7px 10px;
-    border: 1px solid #ccc;
-    /* border-radius: 8px; */
-    font-size: 16px;
-    transition: 0.3s;
-    width: 100%;
-    box-sizing: border-box;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  transition: 0.3s;
+  width: 100%;
+  box-sizing: border-box;
 }
-.firstrow input {
-      padding: 7px 10px;
-    border: 1px solid #ccc;
-   
-    font-size: 16px;
-    transition: 0.3s;
-    width: 100%;
-    box-sizing: border-box;
-}
+
 /* Focus styles */
 form input[type="text"]:focus,
 form input[type="number"]:focus,
 form input[type="date"]:focus,
 form input[type="time"]:focus,
-form select:focus {
+form input[type="email"]:focus {
   border-color: #009bb5;
   box-shadow: 0 0 8px rgba(26, 115, 232, 0.3);
   outline: none;
@@ -94,6 +85,14 @@ form input[type="checkbox"] {
   transform: scale(1.2);
 }
 
+.formadj input {
+      padding: 7px 10px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    transition: 0.3s;
+    width: 100%;
+    box-sizing: border-box;
+}
 .checkbox-group {
   display: flex;
   flex-direction: row;
@@ -138,7 +137,7 @@ form button[type="submit"]:hover {
   form input[type="number"],
   form input[type="date"],
   form input[type="time"],
-  form select {
+  form input[type="email"] {
     font-size: 14px;
   }
 

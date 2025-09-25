@@ -11,6 +11,7 @@ const Form = () => {
     members: "",
     branches: "",
     currentCBS: "",
+    email: "",
     futuristic: [],
     digital: [],
     personsAttending: "",
@@ -47,6 +48,7 @@ const Form = () => {
     members: "",
     branches: "",
     currentCBS: "",
+    email: "",
     futuristic: [],
     digital: [],
     personsAttending: "",
@@ -146,11 +148,11 @@ const Form = () => {
         <h2>Demo Prerequisite Form – Credit Society</h2>
 
         <div className="form-row firstrow">
-          <div className="form-group">
+          <div className="form-group formadj">
             <label>Contact Person:</label>
-            <input name="contactPerson" value={formData.contactPerson} onChange={handleChange} required  />
+            <input name="contactPerson" value={formData.contactPerson} onChange={handleChange} required />
           </div>
-          <div className="form-group firstrow">
+          <div className="form-group formadj">
             <label>Mobile:</label>
             <input name="mobile" value={formData.mobile} onChange={handleChange} required />
           </div>
@@ -178,9 +180,15 @@ const Form = () => {
           </div>
         </div>
 
-        <div className="form-group firstrow">
-          <label>Current CBS Vendor:</label>
-          <input name="currentCBS" value={formData.currentCBS} onChange={handleChange} style={{ maxWidth: "48%" } } />
+        <div className="form-row firstrow formadj">
+          <div className="form-group">
+            <label>Current CBS Vendor:</label>
+            <input name="currentCBS" value={formData.currentCBS} onChange={handleChange} />
+          </div>
+          <div className="form-group formadj">
+            <label>Email (Optional):</label>
+            <input name="email" value={formData.email} onChange={handleChange}/>
+          </div>
         </div>
 
         <h3>Futuristic Banking</h3>
@@ -208,24 +216,17 @@ const Form = () => {
             <label>{item}</label>
           </div>
         ))}
-
-        <div className="form-group">
+      <div className="form-row">
+        <div className="form-group formadj">
           <label>Tentative no of persons attending:</label>
-          <input type="number" name="personsAttending" value={formData.personsAttending} onChange={handleChange} style={{ maxWidth: "max-content" }} />
+          <input type="number" name="personsAttending" value={formData.personsAttending} onChange={handleChange} />
         </div>
 
-        <div className="form-group" style={{ maxWidth: "max-content" }}>
+        <div className="form-group formadj">
           <label>Category:</label>
-          <select name="category" value={formData.category} onChange={handleChange}>
-            <option value="">Select</option>
-            <option value="Chairman">Chairman</option>
-            <option value="Director">Director</option>
-            <option value="General Manager">General Manager</option>
-            <option value="Manager">Manager</option>
-            <option value="Staff/Other">Staff/Other</option>
-          </select>
+          <input name="category" value={formData.category} onChange={handleChange} />
         </div>
-
+</div>
         <button
           type="submit"
           disabled={isSubmitting}
