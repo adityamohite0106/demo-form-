@@ -26,18 +26,24 @@ form h3 {
   display: inline-block;
   padding-bottom: 5px;
 }
-/* Container for logo */
-
 
 /* Logo image */
 .logo img {
- margin: auto;
-    max-width: 80px;
+  margin: auto;
+  max-width: 80px;
+  display: block;
 }
 
-/* Form groups */
-form div {
+/* Form row for side-by-side inputs */
+.form-row {
+  display: flex;
+  gap: 20px;
   margin-bottom: 20px;
+}
+
+/* Form group for individual or paired inputs */
+.form-group {
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
@@ -54,13 +60,24 @@ form input[type="number"],
 form input[type="date"],
 form input[type="time"],
 form select {
-  padding: 10px 12px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 16px;
-  transition: 0.3s;
+  padding: 7px 10px;
+    border: 1px solid #ccc;
+    /* border-radius: 8px; */
+    font-size: 16px;
+    transition: 0.3s;
+    width: 100%;
+    box-sizing: border-box;
 }
-
+.firstrow input {
+      padding: 7px 10px;
+    border: 1px solid #ccc;
+   
+    font-size: 16px;
+    transition: 0.3s;
+    width: 100%;
+    box-sizing: border-box;
+}
+/* Focus styles */
 form input[type="text"]:focus,
 form input[type="number"]:focus,
 form input[type="date"]:focus,
@@ -76,10 +93,12 @@ form input[type="checkbox"] {
   margin-right: 10px;
   transform: scale(1.2);
 }
-.checkbox-group{
-    display: flex
-;
-    flex-direction: row;
+
+.checkbox-group {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
 }
 
 /* Submit button */
@@ -125,5 +144,10 @@ form button[type="submit"]:hover {
 
   form button[type="submit"] {
     font-size: 16px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 10px;
   }
 }

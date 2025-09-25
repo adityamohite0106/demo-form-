@@ -11,8 +11,8 @@ const Form = () => {
     members: "",
     branches: "",
     currentCBS: "",
-    futuristic: [], // Store selected options as array of strings
-    digital: [], // Store selected options as array of strings
+    futuristic: [],
+    digital: [],
     personsAttending: "",
     category: "",
   });
@@ -72,11 +72,10 @@ const Form = () => {
         const currentOptions = prev[category];
         let updatedOptions;
         if (checked) {
-          updatedOptions = [...currentOptions, option]; // Add option if checked
+          updatedOptions = [...currentOptions, option];
         } else {
-          updatedOptions = currentOptions.filter((item) => item !== option); // Remove option if unchecked
+          updatedOptions = currentOptions.filter((item) => item !== option);
         }
-        console.log(`Updated ${category}:`, updatedOptions); // Debug checkbox state
         return { ...prev, [category]: updatedOptions };
       });
     } else {
@@ -86,39 +85,26 @@ const Form = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Prevent double submission
     if (isSubmitting) return;
-    
     setIsSubmitting(true);
 
     try {
-      // Format futuristic and digital as comma-separated strings
       const formattedFormData = {
         ...formData,
         futuristic: formData.futuristic.length > 0 ? formData.futuristic.join(", ") : "None selected",
         digital: formData.digital.length > 0 ? formData.digital.join(", ") : "None selected",
       };
 
-      // Debug the data being sent to EmailJS
-      console.log("Raw formData:", formData);
-      console.log("Formatted Form Data:", formattedFormData);
-
       const response = await emailjs.send(
-        process.env.REACT_APP_EMAILJS_SERVICE_ID, // Use environment variable
-        process.env.REACT_APP_EMAILJS_TEMPLATE_ID, // Use environment variable
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
         formattedFormData,
-        process.env.REACT_APP_EMAILJS_PUBLIC_KEY // Use environment variable
+        process.env.REACT_APP_EMAILJS_PUBLIC_KEY
       );
 
       console.log("SUCCESS!", response.status, response.text);
-      
-      // Clear form on successful submission
       setFormData(initialFormState);
-      
-      // Show success notification
       showNotification("Form submitted successfully! 🎉", "success");
-
     } catch (err) {
       console.log("FAILED...", err);
       showNotification("Failed to send form. Please try again.", "error");
@@ -129,7 +115,6 @@ const Form = () => {
 
   return (
     <div style={{ maxWidth: "800px", margin: "auto", position: "relative" }}>
-      {/* Custom Notification */}
       {notification.show && (
         <div
           style={{
@@ -146,7 +131,7 @@ const Form = () => {
             fontWeight: "500",
             maxWidth: "350px",
             wordWrap: "break-word",
-            animation: "slideIn 0.3s ease-out"
+            animation: "slideIn 0.3s ease-out",
           }}
         >
           {notification.message}
@@ -154,43 +139,48 @@ const Form = () => {
       )}
 
       <form onSubmit={handleSubmit}>
-        <div className="logo"> <img src="image.png" alt="Logo" /></div>
+        <div className="logo">
+          <img src="image.png" alt="Logo" />
+        </div>
 
         <h2>Demo Prerequisite Form – Credit Society</h2>
 
-        <div>
-          <label>Contact Person:</label>
-          <input name="contactPerson" value={formData.contactPerson} onChange={handleChange} required />
+        <div className="form-row firstrow">
+          <div className="form-group">
+            <label>Contact Person:</label>
+            <input name="contactPerson" value={formData.contactPerson} onChange={handleChange} required  />
+          </div>
+          <div className="form-group firstrow">
+            <label>Mobile:</label>
+            <input name="mobile" value={formData.mobile} onChange={handleChange} required />
+          </div>
         </div>
 
-        <div>
-          <label>Mobile:</label>
-          <input name="mobile" value={formData.mobile} onChange={handleChange} required />
+        <div className="form-row">
+          <div className="form-group">
+            <label>Demo Date:</label>
+            <input type="date" name="demoDate" value={formData.demoDate} onChange={handleChange} required />
+          </div>
+          <div className="form-group">
+            <label>Demo Time:</label>
+            <input type="time" name="demoTime" value={formData.demoTime} onChange={handleChange} required />
+          </div>
         </div>
 
-        <div>
-          <label>Demo Date:</label>
-          <input type="date" name="demoDate" value={formData.demoDate} onChange={handleChange} required />
+        <div className="form-row">
+          <div className="form-group">
+            <label>No. of Members for Demo:</label>
+            <input type="number" name="members" value={formData.members} onChange={handleChange} />
+          </div>
+          <div className="form-group">
+            <label>No. of Branches:</label>
+            <input type="number" name="branches" value={formData.branches} onChange={handleChange} />
+          </div>
         </div>
 
-        <div>
-          <label>Demo Time:</label>
-          <input type="time" name="demoTime" value={formData.demoTime} onChange={handleChange} required />
-        </div>
-
-        <div>
-          <label>No. of Members for Demo:</label>
-          <input type="number" name="members" value={formData.members} onChange={handleChange} />
-        </div>
-
-        <div>
-          <label>No. of Branches:</label>
-          <input type="number" name="branches" value={formData.branches} onChange={handleChange} />
-        </div>
-
-        <div>
+        <div className="form-group firstrow">
           <label>Current CBS Vendor:</label>
-          <input name="currentCBS" value={formData.currentCBS} onChange={handleChange} />
+          <input name="currentCBS" value={formData.currentCBS} onChange={handleChange} style={{ maxWidth: "48%" } } />
         </div>
 
         <h3>Futuristic Banking</h3>
@@ -219,12 +209,12 @@ const Form = () => {
           </div>
         ))}
 
-        <div>
+        <div className="form-group">
           <label>Tentative no of persons attending:</label>
-          <input type="number" name="personsAttending" value={formData.personsAttending} onChange={handleChange} />
+          <input type="number" name="personsAttending" value={formData.personsAttending} onChange={handleChange} style={{ maxWidth: "max-content" }} />
         </div>
 
-        <div>
+        <div className="form-group" style={{ maxWidth: "max-content" }}>
           <label>Category:</label>
           <select name="category" value={formData.category} onChange={handleChange}>
             <option value="">Select</option>
@@ -236,13 +226,14 @@ const Form = () => {
           </select>
         </div>
 
-        <button 
-          type="submit" 
+        <button
+          type="submit"
           disabled={isSubmitting}
           style={{
             backgroundColor: isSubmitting ? "#ccc" : "#009bb5",
             cursor: isSubmitting ? "not-allowed" : "pointer",
-            opacity: isSubmitting ? 0.7 : 1
+            opacity: isSubmitting ? 0.7 : 1,
+            marginTop: "20px",
           }}
         >
           {isSubmitting ? "Submitting..." : "Submit"}
